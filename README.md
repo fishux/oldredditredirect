@@ -1,3 +1,7 @@
+# Download the latest extension version
+
+[Download the latest signed XPI](https://github.com/fishux/oldredditredirect/releases/latest/download/oldredditredirect.xpi)
+
 # Old Reddit Auto-Redirect (Firefox Extension)
 
 This repository contains a lightweight Firefox WebExtension that automatically converts every
