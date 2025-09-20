@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Old Reddit Auto-Redirect",
+  "version": "1.0.0",
+  "description": "Automatically redirects any reddit.com link to old.reddit.com while leaving media and API hosts untouched.",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://reddit.com/*",
+    "*://*.reddit.com/*",
+    "*://redd.it/*",
+    "*://*.redd.it/*"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "oldredditredirect@example.com",
+      "strict_min_version": "91.0"
+    }
+  }
+}
