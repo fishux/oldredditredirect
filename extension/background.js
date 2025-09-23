@@ -69,6 +69,24 @@ if (!extensionAPI || !extensionAPI.webRequest || !extensionAPI.webRequest.onBefo
   }
 
   /**
+   * Reddit renders the inbox/chat pop out via a special "webapp" parameter. That view only exists
+   * on the redesign, so redirecting it to old.reddit.com makes the window land on the front page
+   * instead of showing messages. We detect those requests and let them load unmodified.
+   */
+  function isMessagesPopupRequest(url) {
+    if (!url.searchParams.has("webapp")) {
+      return false;
+    }
+
+    const path = url.pathname.toLowerCase();
+    return (
+      path.startsWith("/message/") ||
+      path === "/chat" ||
+      path.startsWith("/chat/")
+    );
+  }
+
+  /**
    * Main redirect handler. Firefox calls this function before it actually loads a URL.
    * We can inspect the request and optionally return a new destination.
    */
@@ -90,6 +108,10 @@ if (!extensionAPI || !extensionAPI.webRequest || !extensionAPI.webRequest.onBefo
 
       // 3) Regular reddit hosts (www, new, m, amp, etc.). They all redirect to old.reddit.com.
       if (isStandardRedditHost(hostname)) {
+        if (isMessagesPopupRequest(url)) {
+          return {};
+        }
+
         url.hostname = OLD_REDDIT_HOST;
         return { redirectUrl: url.toString() };
       }
