@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Old Reddit Auto-Redirect",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automatically redirects any reddit.com link to old.reddit.com while leaving media and API hosts untouched.",
   "background": {
     "scripts": ["background.js"],
